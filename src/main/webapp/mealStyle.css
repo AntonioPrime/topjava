@@ -1,0 +1,19 @@
+tr.exceed {
+    color: red;
+}
+tr.notExceed {
+    color: green;
+}
+td {
+    font-size: larger;
+}
+body {
+    background-color: beige;
+}
+tbody tr:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
+tbody tr::selection {
+    background-color: blue;
+}

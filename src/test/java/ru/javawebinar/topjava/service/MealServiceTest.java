@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.service;
 
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -34,7 +35,7 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-@ActiveProfiles(Profiles.ACTIVE_DB)
+@ActiveProfiles({Profiles.DATAJPA, Profiles.POSTGRES})
 public class MealServiceTest {
     private static final Logger LOG = LoggerFactory.getLogger(MealServiceTest.class);
 
@@ -64,6 +65,11 @@ public class MealServiceTest {
 
     @Autowired
     protected MealService service;
+
+    @Before
+    public void setUp() throws Exception {
+        service.evictCache();
+    }
 
     @Test
     public void testDelete() throws Exception {
